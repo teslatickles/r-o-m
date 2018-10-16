@@ -1,0 +1,15 @@
+.time-elapsed {
+  display: block;
+}
+
+.time-elapsed #minutes {
+  color: #b33939;
+}
+
+#seconds {
+  color: #00a8ff;
+}
+
+#milseconds {
+  color: #487eb0;
+}
