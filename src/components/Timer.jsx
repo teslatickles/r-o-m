@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TimeElapsed from "./TimeElapsed";
-import { toggle } from "../api/connect";
+import { timerUpdate } from "../api/connect";
+import "../styles/timer.css";
 
 class Timer extends Component {
   constructor(props) {
@@ -10,57 +11,77 @@ class Timer extends Component {
       runningTime: 0,
       lapTimes: []
     };
-    ["update", "startTimer", "stopTimer"].forEach(method => {
-      this[method] = this[method].bind(this);
-    });
+    // ["update", "startTimer", "stopTimer"].forEach(method => {
+    //   this[method] = this[method].bind(this);
+    // });
   }
 
   componentDidMount() {
-    toggle(() => {
-      console.log(this.state.lapTimes);
-      this.setState({ isCounting: !this.state.isCounting }, () => {
-        this.state.isCounting ? this.startTimer() : this.stopTimer();
-      });
-      if (this.state.lapTimes) {
+    timerUpdate((isCounting, runTime) => {
+      if (isCounting) {
+        this.setState({
+          isCounting: isCounting,
+          runningTime: runTime
+        });
+      } else {
+        this.setState({
+          isCounting: isCounting,
+          runningTime: runTime,
+          lapTimes: this.state.lapTimes.concat(this.state.runningTime)
+        });
         this.props.callbackFromParent(this.state.lapTimes);
+        // console.log(this.state.lapTimes, this.state.runningTime);
       }
+      //   console.log(
+      //     this.state.isCounting,
+      //     this.state.runningTime,
+      //     this.state.lapTimes
+      //   );
     });
   }
 
-  startTimer() {
-    this.startTime = Date.now();
-    this.timer = setInterval(this.update, 10);
-  }
+  // toggle(() => {
+  //   console.log(this.state.lapTimes);
+  //   this.setState({ isCounting: !this.state.isCounting }, () => {
+  //     this.state.isCounting ? this.startTimer() : this.stopTimer();
+  //   });
+  //   if (this.state.lapTimes) {
+  //   this.props.callbackFromParent(this.state.lapTimes);
+  //   }
+  // });
 
-  update() {
-    const { runningTime } = this.state;
-    var delta = Date.now() - this.startTime;
-    this.setState({ runningTime: runningTime + delta });
-    this.startTime = Date.now();
-  }
+  //   startTimer() {
+  //     this.startTime = Date.now();
+  //     this.timer = setInterval(this.update, 10);
+  //   }
 
-  stopTimer() {
-    const { lapTimes, runningTime } = this.state;
-    this.setState({
-      lapTimes: lapTimes.concat(runningTime),
-      runningTime: 0
-    });
-    clearInterval(this.timer);
-  }
+  //   update() {
+  //     const { runningTime } = this.state;
+  //     var delta = Date.now() - this.startTime;
+  //     this.setState({ runningTime: runningTime + delta });
+  //     this.startTime = Date.now();
+  //   }
 
-  componentWillUnmount() {
-    clearInterval(this.timer);
-  }
+  //   stopTimer() {
+  //     const { lapTimes, runningTime } = this.state;
+  //     this.setState({
+  //       lapTimes: lapTimes.concat(runningTime),
+  //       runningTime: 0
+  //     });
+  //     clearInterval(this.timer);
+  //   }
 
   render() {
     const { runningTime, isCounting } = this.state;
     return (
       <div id="timer-main">
-        <h4>{isCounting && <TimeElapsed runningTime={runningTime} />}</h4>
+        <h4 id="time-display">
+          {isCounting && <TimeElapsed runningTime={runningTime} />}
+        </h4>
         {isCounting && (
           <p>
-            The restroom door has been closed for as many seconds as you see
-            above. <br /> <br />
+            Restroom door has been closed for the duration seen above. <br />{" "}
+            <br />
             {runningTime / 1000 < 60
               ? `Likely just a pee, so far...`
               : `uh-oh could be a poo, at this point`}

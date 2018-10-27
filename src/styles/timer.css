@@ -1,4 +1,13 @@
 #timer-main {
-  display: flex;
-  float: right;
+  align-items: center;
+  justify-content: center;
+  color: #a3cb38;
+  padding-bottom: 3.4%;
+}
+
+h4#time-display {
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
 }

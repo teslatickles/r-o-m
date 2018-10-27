@@ -1,17 +1,61 @@
-.App {
+.container {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  height: 100%;
+  min-height: 100vh;
+  flex-direction: column;
   text-align: center;
   background-color: #282c34;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
 }
 
 .App-header {
   background-color: #58b19f;
-  height: 20%;
+  height: 3%;
+  width: 100%;
+  padding: 1%;
+  top: 0%;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   flex-direction: column;
+  position: absolute;
   align-items: center;
   justify-content: center;
   font-size: calc(7px + 2vmin);
-  color: #d1d8e0;
+  color: #ee5a24;
+}
+
+.App-body {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.row {
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.App-laps {
+  height: 100%;
+  width: 100%;
+  display: inline-flex;
+  order: 1;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
 }
 
 .App-link {
@@ -23,14 +67,18 @@ div#door-state {
   position: relative;
   float: top;
   padding-top: 5%;
+  padding-bottom: 5%;
   color: #b2bec3;
+  align-items: center;
+  justify-content: center;
 }
 
 #chart {
   display: flex;
-  float: center;
-  margin-left: 3%;
-  margin-top: 5%;
+  flex: 2 5 15em;
+  justify-content: center;
+  margin-left: -10%;
+  margin-right: 3%;
 }
 
 #pee {
@@ -41,7 +89,22 @@ div#door-state {
   color: #593001;
 }
 
+img#tp-img {
+  display: inline-flex;
+  position: relative;
+  height: 131px;
+  padding: 3%;
+  align-items: center;
+  justify-content: center;
+}
+
 body {
   background-color: #282c34;
-  overflow: auto;
+  overflow: hidden;
+  justify-content: center;
+}
+
+div {
+  height: 100%;
+  width: 100%;
 }

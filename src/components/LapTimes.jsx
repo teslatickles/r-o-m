@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import TimeElapsed from "./TimeElapsed";
+import Anime from "react-anime";
 import "../styles/laptimes.css";
 
 class LapTimes extends Component {
@@ -26,7 +27,7 @@ class LapTimes extends Component {
     return (
       <div id="scroll-tbl">
         <table id="laptimes-table">
-          <thead>
+          <thead id="table-heading">
             <tr>
               <th id="order-heading">#</th>
               <th id="times-heading">Time</th>

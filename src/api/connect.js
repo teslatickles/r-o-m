@@ -8,6 +8,22 @@ function connect(cb) {
     cb();
   });
 
+  socket.emit("authentication", {
+    token: prompt("have to go?") === "yes" ? "secret token" : null
+  });
+
+  socket.on("unauthorized", reason => {
+    console.log(`Unauthorized:, ${reason}`);
+
+    //   error = reason.message;
+
+    socket.disconnect();
+  });
+
+  //   socket.on("disconnect", reason => {
+  //       console.log(`Disconnected: ${error || reason}`);
+  //   })
+
   socket.on("addUser", updatedNumber => {
     cb(updatedNumber);
   });
@@ -16,6 +32,19 @@ function connect(cb) {
     cb(updatedNumber);
   });
 }
+
+function getToday(cb) {
+  socket.on("today", result => {
+    cb(result);
+  });
+}
+
+function getDoorCount(cb) {
+  socket.on("pCount", result => {
+    cb(result);
+  });
+}
+
 function checkDoorStatus(cb) {
   socket.on("doorstatus", result => {
     console.log("door is currently open?", result);
@@ -23,11 +52,36 @@ function checkDoorStatus(cb) {
   });
 }
 
-function toggle(cb) {
-  socket.on("toggle", () => {
-    console.log("timer toggled");
-    cb();
+function logTime(cb) {
+  socket.on("logTime", result => {
+    cb(result);
   });
 }
 
-export { connect, checkDoorStatus, toggle };
+function timerUpdate(cb) {
+  socket.on("timerStream", (isCounting, runTime) => {
+    cb(isCounting, runTime);
+  });
+}
+
+// function stopTimer(cb) {
+//   socket.on("stopTimer", (isCounting, runningTime) => {
+//     cb(isCounting, runningTime);
+//   });
+// }
+
+// function toggle(cb) {
+//   socket.on("toggle", () => {
+//     console.log("timer toggled");
+//     cb();
+//   });
+// }
+
+export {
+  connect,
+  getToday,
+  getDoorCount,
+  checkDoorStatus,
+  timerUpdate,
+  logTime
+};

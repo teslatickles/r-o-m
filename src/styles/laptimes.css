@@ -1,6 +1,6 @@
 table {
   table-layout: fixed;
-  width: 39%;
+  width: 100%;
   border-collapse: collapse;
 }
 
@@ -8,71 +8,64 @@ table {
   overflow-y: auto;
 }
 
-thead th:nth-child(1) {
-  width: 5%;
-}
-
-thead th:nth-child(2) {
-  width: 35%;
-}
-
-thead th:nth-child(3) {
-  width: 15%;
-}
-
-thead th:nth-child(4) {
-  width: 30%;
-}
-
 th,
 td {
-  padding: 5px;
+  padding: 2%;
 }
 
 th {
   letter-spacing: 2px;
   background-color: #4b4b4b;
-  border-radius: 5px;
+  border-radius: 3px;
+  margin-right: 15%;
+  width: 5%;
 }
 
 td {
   letter-spacing: 1px;
+  margin-left: 35%;
 }
 
-#laptimes-table {
-  display: block;
-  position: relative;
-  float: bottom;
-  align-content: center;
-  padding-left: 5%;
-  padding-top: 5%;
-  padding-bottom: 3%;
+tr {
+  width: 100%;
+  float: left;
+  height: 100%;
 }
+/* 
+#laptimes-table {
+  /* display: block; */
+/* position: relative; */
+/* float: bottom; */
+/* align-content: center; */
+/* padding-left: 5%;
+  padding-top: 5%;
+  padding-bottom: 3%; 
+} */
 
 td#laptime {
-  padding-left: 15%;
+  padding-left: 8%;
 }
 
 td#count {
-  padding-left: 5px;
+  padding-left: 10%;
 }
 
 #order-heading {
   color: #eab543;
-  padding: 5px;
+  /* padding: 5px; */
 }
 
 #times-heading {
-  display: inline-flex;
+  /* display: inline-flex; */
   color: #58b19f;
-  padding: 5px;
-  padding-left: 25%;
+  /* padding: 5px; */
+  /* padding-left: 25%; */
 }
 
 #table-rows {
-  display: block;
+  display: flex;
   position: relative;
-  padding: 3px;
+  padding: 5%;
 }
 
 #avg-head {
@@ -80,15 +73,17 @@ td#count {
   position: relative;
   float: left;
   color: #d1ccc0;
-  bottom: 5%;
+  bottom: -1.2%;
+  margin-left: 37%;
+  align-items: center;
+  justify-content: center;
 }
 
-#lap-average {
-  display: block;
+div#lap-average {
+  display: inline-flex;
   position: relative;
-  float: bottom;
-  padding-top: 15%;
-  padding: 6%;
+  float: left;
+  padding: 5%;
   color: #ff793f;
-  margin-bottom: 10%;
+  margin-bottom: 3%;
 }

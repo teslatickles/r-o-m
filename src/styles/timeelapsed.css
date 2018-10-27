@@ -4,12 +4,15 @@
 
 .time-elapsed #minutes {
   color: #b33939;
+  font-size: 21px;
 }
 
 #seconds {
   color: #00a8ff;
+  font-size: 21px;
 }
 
 #milseconds {
   color: #487eb0;
+  font-size: 18px;
 }
