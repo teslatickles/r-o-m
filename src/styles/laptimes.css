@@ -1,36 +1,11 @@
-table {
-  table-layout: fixed;
-  width: 100%;
-  border-collapse: collapse;
+.ReactTable .rt-head {
+  overflow-y: scroll;
 }
 
 #scroll-tbl {
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 
-th,
-td {
-  padding: 2%;
-}
-
-th {
-  letter-spacing: 2px;
-  background-color: #4b4b4b;
-  border-radius: 3px;
-  margin-right: 15%;
-  width: 5%;
-}
-
-td {
-  letter-spacing: 1px;
-  margin-left: 35%;
-}
-
-tr {
-  width: 100%;
-  float: left;
-  height: 100%;
-}
 /* 
 #laptimes-table {
   /* display: block; */
@@ -41,49 +16,3 @@ tr {
   padding-top: 5%;
   padding-bottom: 3%; 
 } */
-
-td#laptime {
-  padding-left: 8%;
-}
-
-td#count {
-  padding-left: 10%;
-}
-
-#order-heading {
-  color: #eab543;
-  /* padding: 5px; */
-}
-
-#times-heading {
-  /* display: inline-flex; */
-  color: #58b19f;
-  /* padding: 5px; */
-  /* padding-left: 25%; */
-}
-
-#table-rows {
-  display: flex;
-  position: relative;
-  padding: 5%;
-}
-
-#avg-head {
-  display: inline-flex;
-  position: relative;
-  float: left;
-  color: #d1ccc0;
-  bottom: -1.2%;
-  margin-left: 37%;
-  align-items: center;
-  justify-content: center;
-}
-
-div#lap-average {
-  display: inline-flex;
-  position: relative;
-  float: left;
-  padding: 5%;
-  color: #ff793f;
-  margin-bottom: 3%;
-}

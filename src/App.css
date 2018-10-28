@@ -9,7 +9,7 @@
   flex-direction: column;
   text-align: center;
   background-color: #282c34;
-  overflow: hidden;
+  overflow-x: hidden;
   align-items: center;
   justify-content: center;
 }
@@ -49,9 +49,7 @@
 }
 
 .App-laps {
-  height: 100%;
-  width: 100%;
-  display: inline-flex;
+  display: flex;
   order: 1;
   flex: 1;
   align-items: center;
@@ -67,7 +65,7 @@ div#door-state {
   position: relative;
   float: top;
   padding-top: 5%;
-  padding-bottom: 5%;
+  padding-bottom: 3%;
   color: #b2bec3;
   align-items: center;
   justify-content: center;
@@ -92,15 +90,15 @@ div#door-state {
 img#tp-img {
   display: inline-flex;
   position: relative;
-  height: 131px;
-  padding: 3%;
+  padding-bottom: 3%;
+  height: 125px;
   align-items: center;
   justify-content: center;
 }
 
 body {
   background-color: #282c34;
-  overflow: hidden;
+  overflow: auto;
   justify-content: center;
 }
 

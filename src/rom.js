@@ -92,7 +92,8 @@ board.on("ready", () => {
     isCounting = true;
     startTime = Date.now();
     timer = setInterval(update, 10);
-    console.log(runningTime);
+    // for debugging purposes
+    // console.log(runningTime);
   };
 
   sw.on("close", () => {
@@ -109,7 +110,6 @@ board.on("ready", () => {
     isCounting = false;
     io.emit("doorstatus", true);
     runningTime = 0;
-    // io.emit("logTime");
   });
 
   //   async function verifyUser(token) {

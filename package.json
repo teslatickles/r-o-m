@@ -12,6 +12,7 @@
     "react-anime": "^2.2.0",
     "react-dom": "^16.5.2",
     "react-scripts": "2.0.4",
+    "react-table": "^6.8.6",
     "recharts": "^1.3.4",
     "simple-flexbox": "^1.2.0",
     "socket.io": "^2.1.1",

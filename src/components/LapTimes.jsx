@@ -1,45 +1,74 @@
 import React, { Component } from "react";
-import TimeElapsed from "./TimeElapsed";
-import Anime from "react-anime";
+import ReactTable from "react-table";
+import "react-table/react-table.css";
 import "../styles/laptimes.css";
+
+let tableData = [];
 
 class LapTimes extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      laps: []
+      laps: [],
+      data: []
     };
   }
+
+  componentDidMount() {
+    this.setState({
+      data: tableData
+    });
+  }
+
   render() {
-    const rows = this.props.lapTimes.map((lapTime, index) => (
-      <tr key={++index}>
-        <td id="count">{index}</td>
-        <td id="laptime">
-          <TimeElapsed runningTime={lapTime} />
-        </td>
-      </tr>
-    ));
-    const avgTime = this.props.lapTimes.reduce((sum, lapTime, i) => {
-      ++i;
+    const { pCount, lapTimes } = this.props;
+    lapTimes.map(
+      (current, i) =>
+        (tableData[i] = {
+          [`count`]: i + 1,
+          [`time`]: current / 1000
+        })
+    );
+    // console.log(this.props.lapTimes);
+    const avgTime = lapTimes.reduce((sum, lapTime) => {
       sum += lapTime;
-      return sum / i + 1;
+      return sum / pCount;
     }, 0);
+    const columns = [
+      {
+        Header: "Restroom Data for:",
+        columns: [
+          {
+            Header: "Session #:",
+            accessor: "count",
+            Footer: (
+              <span>
+                <strong>Total: {pCount}</strong>
+              </span>
+            )
+          },
+          {
+            Header: "Time",
+            accessor: "time",
+            id: d => d.time,
+            Footer: (
+              <span>
+                <strong>Average: {avgTime}</strong>
+              </span>
+            )
+          }
+        ]
+      }
+    ];
+    console.log(this.state.data);
     return (
-      <div id="scroll-tbl">
-        <table id="laptimes-table">
-          <thead id="table-heading">
-            <tr>
-              <th id="order-heading">#</th>
-              <th id="times-heading">Time</th>
-            </tr>
-          </thead>
-          <tbody id="table-rows">{rows}</tbody>
-        </table>
-        <div id="avg-head">
-          <h5>Average P* Time:</h5>
-        </div>
-        <div id="lap-average">
-          <TimeElapsed runningTime={avgTime} />
+      <div>
+        <div id="scroll-tbl">
+          <ReactTable
+            className="-striped -highlight"
+            data={this.state.data}
+            columns={columns}
+          />
         </div>
       </div>
     );

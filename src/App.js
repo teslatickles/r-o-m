@@ -1,16 +1,15 @@
 import React, { Component } from "react";
 import Timer from "../src/components/Timer";
 import LapTimes from "./components/LapTimes";
+import { Column, Row } from "simple-flexbox";
+import firebase from "firebase";
+import "./App.css";
 import {
   connect,
   checkDoorStatus,
   getToday,
   getDoorCount
 } from "../src/api/connect";
-import { Column, Row } from "simple-flexbox";
-import firebase from "firebase";
-import Anime from "react-anime";
-
 import {
   LineChart,
   Line,
@@ -22,8 +21,6 @@ import {
   Legend,
   ReferenceLine
 } from "recharts";
-
-import "./App.css";
 
 // Initialize Firebase
 var config = {
@@ -86,17 +83,17 @@ class App extends Component {
   getDataFromTimer = data => {
     console.log(this.state.today);
     const formattedData = data[data.length - 1];
-    // this.logRef.push({
-    //   lap: formattedData,
-    //   date: this.state.today
-    // });
+    this.logRef.push({
+      lap: formattedData,
+      date: this.state.today
+    });
     console.log("help:", formattedData, data, data[data.length - 1]);
   };
 
   render() {
-    const { connectedUsers, doorOpen, lapsFromTimer } = this.state;
+    const { connectedUsers, doorOpen, pCount, lapsFromTimer } = this.state;
     var arraydata = [];
-    this.state.lapsFromTimer.reduce(
+    lapsFromTimer.reduce(
       (x, current, i) =>
         (arraydata[i] = {
           ...x,
@@ -147,14 +144,14 @@ class App extends Component {
         <Row vertical="center" horizontal="start">
           <div className="chart-div">
             <span id="chart">
-              <ResponsiveContainer width="92%" height={375} debounce={2}>
+              <ResponsiveContainer width="92%" height={300} debounce={1}>
                 <LineChart
                   data={arraydata}
                   margin={{ top: 10, right: 15, left: 15, bottom: 10 }}
                 >
                   <XAxis dataKey="count" />
                   <YAxis />
-                  <CartesianGrid strokeDasharray="8 5" />
+                  <CartesianGrid strokeDasharray=" 5" />
                   <Tooltip />
                   <Legend />
                   <ReferenceLine
@@ -176,7 +173,11 @@ class App extends Component {
         <Row vertical="center" horizontal="center">
           <Column>
             <span>
-              <LapTimes className="App-laps" lapTimes={lapsFromTimer} />
+              <LapTimes
+                className="App-laps"
+                pCount={pCount}
+                lapTimes={lapsFromTimer}
+              />
             </span>
           </Column>
         </Row>
