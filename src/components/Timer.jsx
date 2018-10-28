@@ -30,7 +30,7 @@ class Timer extends Component {
           lapTimes: this.state.lapTimes.concat(this.state.runningTime)
         });
         this.props.callbackFromParent(this.state.lapTimes);
-        // console.log(this.state.lapTimes, this.state.runningTime);
+        console.log(this.state.lapTimes, this.state.runningTime);
       }
       //   console.log(
       //     this.state.isCounting,

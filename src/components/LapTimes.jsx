@@ -32,11 +32,11 @@ class LapTimes extends Component {
     // console.log(this.props.lapTimes);
     const avgTime = lapTimes.reduce((sum, lapTime) => {
       sum += lapTime;
-      return sum / pCount;
+      return (sum / pCount).toFixed(2);
     }, 0);
     const columns = [
       {
-        Header: "Restroom Data for:",
+        Header: `Restroom Data for: ${this.props.date}`,
         columns: [
           {
             Header: "Session #:",
