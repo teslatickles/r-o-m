@@ -29,8 +29,8 @@
   position: absolute;
   align-items: center;
   justify-content: center;
-  font-size: calc(7px + 2vmin);
-  color: #ee5a24;
+  font-size: calc(5px + 1.7vmin);
+  color: #eb2f06;
 }
 
 .App-body {
@@ -64,17 +64,25 @@ div#door-state {
   display: inline-flex;
   position: relative;
   float: top;
-  padding-top: 5%;
-  padding-bottom: 3%;
+  padding-top: 8%;
+  padding-bottom: 5%;
   color: #b2bec3;
   align-items: center;
   justify-content: center;
 }
 
+#tp-timer-tx {
+  /* blog bit here -- fixing my divs from shifting on timer component rendering */
+  min-height: 207.5px;
+  width: 100%;
+}
+
 #chart {
   display: flex;
-  flex: 2 5 15em;
+  flex: 5 5 15em;
   justify-content: center;
+  padding: 3%;
+  margin-top: -10%;
   margin-left: -10%;
   margin-right: 3%;
 }
@@ -90,8 +98,8 @@ div#door-state {
 img#tp-img {
   display: inline-flex;
   position: relative;
-  padding-bottom: 3%;
   height: 125px;
+  max-width: 100%;
   align-items: center;
   justify-content: center;
 }
