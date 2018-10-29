@@ -36,10 +36,10 @@ class LapTimes extends Component {
     }, 0);
     const columns = [
       {
-        Header: `Restroom Data for: ${this.props.date}`,
+        Header: `Restroom Data for ${this.props.date}`,
         columns: [
           {
-            Header: "Session #:",
+            Header: "Session",
             accessor: "count",
             Footer: (
               <span>
@@ -66,6 +66,8 @@ class LapTimes extends Component {
         <div id="scroll-tbl">
           <ReactTable
             className="-striped -highlight"
+            noDataText="oh no, cannot find data"
+            defaultPageSize={5}
             data={this.state.data}
             columns={columns}
           />

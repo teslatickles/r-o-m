@@ -32,6 +32,14 @@ board.on("ready", () => {
   const connectionLed = new five.Led(11);
 
   io.on("connection", async socket => {
+    // if necessary to have state fetched before rendering client-side
+    // also MUST be included here, in async connection socket event
+    // - blog this!!!!!! my surmounting of problem!!!!!
+    if (!sw.isClosed) {
+      io.emit("doorstatus", true);
+    } else {
+      io.emit("doorstatus", false);
+    }
     const rawToday = new Date();
     let dd = rawToday.getDate();
     let mm = rawToday.getMonth() + 1;
@@ -81,14 +89,13 @@ board.on("ready", () => {
   };
 
   const startTimer = () => {
-    if (!sw.isClosed) {
-      io.emit("doorstatus", true);
-      runningTime = 0;
-    } else {
-      pCount++;
-      io.emit("pCount", pCount);
-      io.emit("doorstatus", false);
-    }
+    // if (!sw.isClosed) {
+    //   io.emit("doorstatus", true);
+    //   runningTime = 0;
+    // } else {}
+    pCount++;
+    io.emit("pCount", pCount);
+    io.emit("doorstatus", false);
     isCounting = true;
     startTime = Date.now();
     timer = setInterval(update, 10);

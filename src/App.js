@@ -41,7 +41,7 @@ class App extends Component {
       today: null,
       connectedUsers: 0,
       pCount: 0,
-      doorOpen: Boolean,
+      doorOpen: null,
       lapsFromTimer: []
     };
     connect(result => {
@@ -53,7 +53,22 @@ class App extends Component {
     this.logRef = firebase.database().ref("log");
   }
 
+  //   async componentWillMount() {
+  //     try {
+  //       checkDoorStatus(result => {
+  //         this.setState({ doorOpen: result });
+  //       });
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
   componentDidMount() {
+    checkDoorStatus(result => {
+      this.setState({
+        doorOpen: result
+      });
+      console.log(result);
+    });
     getToday(result => {
       this.setState({
         today: result
@@ -65,11 +80,6 @@ class App extends Component {
         pCount: result
       });
       console.log(result);
-    });
-    checkDoorStatus(result => {
-      this.setState({
-        doorOpen: result
-      });
     });
     this.logRef.on("child_added", snapshot => {
       const lap = snapshot.val();
@@ -131,7 +141,7 @@ class App extends Component {
         </Row>
         <Row vertical="center" horizontal="center">
           <Column vertical="end">
-            <span>
+            <span id="tp-timer-tx">
               {!doorOpen ? (
                 <Timer
                   className="timerUI"
@@ -150,7 +160,7 @@ class App extends Component {
         <Row vertical="center" horizontal="start">
           <div className="chart-div">
             <span id="chart">
-              <ResponsiveContainer width="90%" height={300} debounce={1}>
+              <ResponsiveContainer width="90%" height={215} debounce={1}>
                 <LineChart
                   data={arraydata}
                   margin={{ top: 10, right: 15, left: 15, bottom: 10 }}
@@ -178,14 +188,18 @@ class App extends Component {
         </Row>
         <Row vertical="center" horizontal="center">
           <Column>
-            <span>
-              <LapTimes
-                className="App-laps"
-                date={today}
-                pCount={pCount}
-                lapTimes={lapsFromTimer}
-              />
-            </span>
+            {!lapsFromTimer ? (
+              <span>`Loading...`</span>
+            ) : (
+              <span>
+                <LapTimes
+                  className="App-laps"
+                  date={today}
+                  pCount={pCount}
+                  lapTimes={lapsFromTimer}
+                />
+              </span>
+            )}
           </Column>
         </Row>
         <footer>`I have been rendered: ${++this.counter}`</footer>
