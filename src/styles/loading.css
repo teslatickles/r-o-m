@@ -1,0 +1,8 @@
+.loading-cylon {
+  display: block;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  bottom: 45%;
+  left: 33%;
+}

@@ -6,11 +6,11 @@ const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 const socketAuth = require("socketio-auth");
-// const adapter = require("socket.io-redis");
+const adapter = require("socket.io-redis");
 
 // const redisAdapter = adapter({
 //   host: process.env.REDIS_HOST || "localhost",
-//   port: process.env.REDIS_PORT || 6379,
+//   port: process.env.REDIS_PORT || 3000,
 //   password: process.env.REDIS_PASS || "password"
 // });
 
@@ -32,7 +32,7 @@ board.on("ready", () => {
   const connectionLed = new five.Led(11);
 
   io.on("connection", async socket => {
-    // if necessary to have state fetched before rendering client-side
+    // if-else necessary to have state fetched before rendering client-side
     // also MUST be included here, in async connection socket event
     // - blog this!!!!!! my surmounting of problem!!!!!
     if (!sw.isClosed) {
@@ -54,18 +54,17 @@ board.on("ready", () => {
     }
     const today = `${mm}/${dd}/${yyyy}`;
     io.emit("today", today);
-    console.log(today);
-    console.log(
-      `Client-Socket ${socket.id} has successfully connected to the server`
-    );
+    io.emit("pCount", pCount);
     numUsers = numUsers + 1;
     io.emit("addUser", numUsers);
-    console.log({ connected: numUsers });
     connectionLed.on() && connectionLed.off();
     socket.once("disconnect", () => {
       numUsers = numUsers - 1;
       io.emit("removeUser", numUsers);
     });
+    console.log(`Clients Connected: ${numUsers}`);
+    console.log(`Client ${socket.id} has successfully connected to the server`);
+    console.log(`Today's date: ${today}`);
   });
 
   const update = () => {
@@ -83,6 +82,10 @@ board.on("ready", () => {
     isCounting = false;
     runningTime = 0;
     clearInterval(timer);
+    // pCount++ was moved here to fix table average data and count problem;
+    // needed to update times and do averaging math AFTER bathroom session.
+    pCount++;
+    io.emit("pCount", pCount);
     io.emit("timerStream", isCounting, runningTime);
     // debug log for timer -- no runaways!
     console.log(`stopTimer has been called: ${runningTime}`);
@@ -93,8 +96,7 @@ board.on("ready", () => {
     //   io.emit("doorstatus", true);
     //   runningTime = 0;
     // } else {}
-    pCount++;
-    io.emit("pCount", pCount);
+    // moved pCount++ to stopTimer() above
     io.emit("doorstatus", false);
     isCounting = true;
     startTime = Date.now();

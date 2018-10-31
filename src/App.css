@@ -15,7 +15,7 @@
 }
 
 .App-header {
-  background-color: #58b19f;
+  background-color: #1e272e;
   height: 3%;
   width: 100%;
   padding: 1%;
@@ -82,9 +82,18 @@ div#door-state {
   flex: 5 5 15em;
   justify-content: center;
   padding: 3%;
-  margin-top: -10%;
-  margin-left: -10%;
-  margin-right: 3%;
+  margin-top: -17%;
+  margin-left: -15%;
+  margin-right: 0%;
+}
+/* working on responsive design  */
+@media only screen and (min-width: 768px) {
+  #chart {
+    margin-top: -7%;
+    padding: 3%;
+    margin-left: -8%;
+    margin-right: -5%;
+  }
 }
 
 #pee {
@@ -102,6 +111,22 @@ img#tp-img {
   max-width: 100%;
   align-items: center;
   justify-content: center;
+}
+
+img#no-chart-img {
+  display: inline-flex;
+  position: relative;
+  height: 105px;
+  max-width: 100%;
+  padding: 3%;
+  padding-bottom: 7%;
+  align-items: center;
+  justify-content: center;
+}
+
+#no-chart-txt {
+  margin-top: -12%;
+  color: #fdcb6e;
 }
 
 body {

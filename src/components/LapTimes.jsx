@@ -32,10 +32,19 @@ class LapTimes extends Component {
     // console.log(this.props.lapTimes);
     const avgTime = lapTimes.reduce((sum, lapTime) => {
       sum += lapTime;
-      return (sum / pCount).toFixed(2);
+      sum = sum / pCount;
+      return sum;
     }, 0);
+    // console.log(pCount, avgTime);
     const columns = [
       {
+        getFooterProps: (state, rowInfo, column) => {
+          return {
+            style: {
+              color: rowInfo.row.name === "Total: 1" ? "red" : null
+            }
+          };
+        },
         Header: `Restroom Data for ${this.props.date}`,
         columns: [
           {
@@ -53,7 +62,7 @@ class LapTimes extends Component {
             id: d => d.time,
             Footer: (
               <span>
-                <strong>Average: {avgTime}</strong>
+                <strong>Average: {(avgTime / 1000).toFixed(2)}</strong>
               </span>
             )
           }

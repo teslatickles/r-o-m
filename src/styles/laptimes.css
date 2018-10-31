@@ -1,8 +1,10 @@
-.ReactTable .rt-head {
+ReactTable.rt-head {
+  color: red;
   overflow-y: scroll;
 }
 
 #scroll-tbl {
+  color: #dff9fb;
   overflow-y: scroll;
 }
 

@@ -11,9 +11,6 @@ class Timer extends Component {
       runningTime: 0,
       lapTimes: []
     };
-    // ["update", "startTimer", "stopTimer"].forEach(method => {
-    //   this[method] = this[method].bind(this);
-    // });
   }
 
   componentDidMount() {
@@ -30,46 +27,10 @@ class Timer extends Component {
           lapTimes: this.state.lapTimes.concat(this.state.runningTime)
         });
         this.props.callbackFromParent(this.state.lapTimes);
-        console.log(this.state.lapTimes, this.state.runningTime);
+        // console.log(this.state.lapTimes, this.state.runningTime);
       }
-      //   console.log(
-      //     this.state.isCounting,
-      //     this.state.runningTime,
-      //     this.state.lapTimes
-      //   );
     });
   }
-
-  // toggle(() => {
-  //   console.log(this.state.lapTimes);
-  //   this.setState({ isCounting: !this.state.isCounting }, () => {
-  //     this.state.isCounting ? this.startTimer() : this.stopTimer();
-  //   });
-  //   if (this.state.lapTimes) {
-  //   this.props.callbackFromParent(this.state.lapTimes);
-  //   }
-  // });
-
-  //   startTimer() {
-  //     this.startTime = Date.now();
-  //     this.timer = setInterval(this.update, 10);
-  //   }
-
-  //   update() {
-  //     const { runningTime } = this.state;
-  //     var delta = Date.now() - this.startTime;
-  //     this.setState({ runningTime: runningTime + delta });
-  //     this.startTime = Date.now();
-  //   }
-
-  //   stopTimer() {
-  //     const { lapTimes, runningTime } = this.state;
-  //     this.setState({
-  //       lapTimes: lapTimes.concat(runningTime),
-  //       runningTime: 0
-  //     });
-  //     clearInterval(this.timer);
-  //   }
 
   render() {
     const { runningTime, isCounting } = this.state;
@@ -80,8 +41,7 @@ class Timer extends Component {
         </h4>
         {isCounting && (
           <p>
-            Restroom door has been closed for the duration seen above. <br />{" "}
-            <br />
+            Restroom door has been closed for duration above. <br />{" "}
             {runningTime / 1000 < 60
               ? `Likely just a pee, so far...`
               : `uh-oh could be a poo, at this point`}
@@ -93,3 +53,41 @@ class Timer extends Component {
 }
 
 export default Timer;
+
+// ["update", "startTimer", "stopTimer"].forEach(method => {
+//   this[method] = this[method].bind(this);
+// });
+
+// this is the client-side React code I converted to Node/JS and moved
+// to the backend--primarily Timer-related code that would not allow
+// client's access to timer when already engaged. Blog this!!!!!!!!!!!!
+// toggle(() => {
+//   console.log(this.state.lapTimes);
+//   this.setState({ isCounting: !this.state.isCounting }, () => {
+//     this.state.isCounting ? this.startTimer() : this.stopTimer();
+//   });
+//   if (this.state.lapTimes) {
+//   this.props.callbackFromParent(this.state.lapTimes);
+//   }
+// });
+
+//   startTimer() {
+//     this.startTime = Date.now();
+//     this.timer = setInterval(this.update, 10);
+//   }
+
+//   update() {
+//     const { runningTime } = this.state;
+//     var delta = Date.now() - this.startTime;
+//     this.setState({ runningTime: runningTime + delta });
+//     this.startTime = Date.now();
+//   }
+
+//   stopTimer() {
+//     const { lapTimes, runningTime } = this.state;
+//     this.setState({
+//       lapTimes: lapTimes.concat(runningTime),
+//       runningTime: 0
+//     });
+//     clearInterval(this.timer);
+//   }
