@@ -53,6 +53,7 @@
 #App-footer {
   display: flex;
   flex-flow: wrap;
+  margin-top: -7%;
   flex: 1;
   justify-content: space-between;
   align-content: center;
@@ -94,18 +95,18 @@ div#welcome-msg {
   border-radius: 4px;
   background-color: #4e3e34;
   box-shadow: 2px 2px #fab1a0;
-  width: 85%;
+  width: 78%;
   padding: 2%;
   align-items: center;
   justify-content: center;
-  margin-top: 15%;
+  margin-top: 18%;
 }
 
 div#door-state {
   display: inline-flex;
   position: relative;
   float: top;
-  padding-top: 0%;
+  margin-top: 5%;
   padding-bottom: 5%;
   color: #f3edea;
   align-items: center;
@@ -153,6 +154,14 @@ h4#chart-title {
   }
 }
 
+#links-span {
+  display: -webkit-flex;
+  flex: 5 5;
+  margin-top: 8%;
+  justify-content: center;
+  align-content: center;
+}
+
 #pee {
   color: #edd16b;
 }
@@ -186,8 +195,8 @@ h4#chart-title {
   display: inline-flex;
   position: relative;
   color: #ffeaa7;
-  font-size: 15px;
-  margin-top: 6%;
+  font-size: 13px;
+  margin-top: 3%;
   align-items: center;
   justify-content: center;
 }
@@ -250,8 +259,8 @@ img#no-chart-img {
 
 img#footer-logo {
   display: inline-flex;
-  height: 50px;
-  margin-bottom: -3%;
+  height: 40px;
+  margin-bottom: -7%;
   align-items: center;
 }
 
@@ -261,18 +270,15 @@ img#octocat {
   flex: 1;
   align-content: center;
   justify-content: center;
-  height: 35px;
-  padding-top: 8%;
-  padding: 2%;
+  height: 41px;
   float: center;
 }
 
 img#ramen-pack {
-  height: 32px;
+  height: 38px;
   display: inline-flex;
   flex: 1;
   position: relative;
-  padding: 2%;
   align-content: center;
   justify-content: center;
 }

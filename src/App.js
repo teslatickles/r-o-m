@@ -103,6 +103,7 @@ class App extends Component {
     const { today } = this.state;
     console.log(this.state.today);
     const formattedData = data.length < 1 ? null : data.slice(-1).pop();
+    // this pushes to firebase -- careful, needs to be fixed
     // this.logRef.push({
     //   lap: formattedData,
     //   date: data.length < 1 ? null : today
@@ -159,7 +160,7 @@ class App extends Component {
                 <div id="door-state">
                   {doorOpen ? (
                     <h3>
-                      You are free to try to <span id="pee">Pee </span>
+                      You Are Free To Try To <span id="pee">Pee </span>
                       or <span id="poop">Poop</span>
                     </h3>
                   ) : (
@@ -259,7 +260,7 @@ class App extends Component {
             </Column>
           </Row>
           <Row vertical="center" horizontal="center">
-            <Column>
+            <Column id="footer">
               <footer id="App-footer">
                 <span id="links-span">
                   <a href="https://gobot.com/">
@@ -287,18 +288,19 @@ class App extends Component {
                     alt="balloon icon for footer menu"
                   />
                 </button> */}
-                <div id="footer-text">
-                  I have been rendered {++this.counter} times
-                </div>
-                <div id="copyright-text">
-                  copyright @ teslatickles [hunterhartline@gmail.com] 2018
-                </div>
-                <div>
+                {/* <div>
                   <img
                     id="footer-logo"
                     src={footerLogo}
                     alt="responsive design logo at footer"
                   />
+                </div> */}
+                {/* this render counter is not correctly implemented for production use! needs to be in state */}
+                <div id="footer-text">
+                  I have been rendered {++this.counter} times
+                </div>
+                <div id="copyright-text">
+                  copyright @ teslatickles [hunterhartline@gmail.com] 2018
                 </div>
               </footer>
             </Column>
