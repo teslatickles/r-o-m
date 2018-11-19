@@ -14,6 +14,14 @@ class LapTimes extends Component {
     };
   }
 
+  //   shouldComponentUpdate(nextProps) {
+  //     if (this.props.value !== nextProps.value) {
+  //       return true;
+  //     } else {
+  //       return false;
+  //     }
+  //   }
+
   componentDidMount() {
     this.setState({
       data: tableData

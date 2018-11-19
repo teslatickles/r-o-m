@@ -53,6 +53,7 @@ board.on("ready", () => {
       mm = `0${mm}`;
     }
     const today = `${mm}/${dd}/${yyyy}`;
+    // initial emit to client to grab today's date and door cycles so far
     io.emit("today", today);
     io.emit("pCount", pCount);
     numUsers = numUsers + 1;
@@ -73,8 +74,8 @@ board.on("ready", () => {
       runningTime = runningTime += delta;
       startTime = Date.now();
       io.emit("timerStream", isCounting, runningTime);
-      console.log(runningTime);
-      console.log(`test`);
+      //   console.log(runningTime);
+      //   console.log(`test`);
     }
   };
 
@@ -107,14 +108,14 @@ board.on("ready", () => {
 
   sw.on("close", () => {
     console.log("door is closed");
-    freeToPeeLed.off();
+    freeToPeeLed.blink(100);
     startTimer();
     io.emit("doorstatus", false);
   });
 
   sw.on("open", () => {
     console.log("door is open");
-    freeToPeeLed.on();
+    freeToPeeLed.stop().on();
     stopTimer();
     isCounting = false;
     io.emit("doorstatus", true);

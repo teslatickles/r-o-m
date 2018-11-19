@@ -6,6 +6,10 @@ import firebase from "firebase";
 import Loading from "./components/Loading";
 import "./App.css";
 import chartLogo from "../src/statistics.svg";
+// import footerImg from "../src/balloon.svg";
+import footerLogo from "../src/responsive.gif";
+import Octocat from "../src/Octocat.png";
+
 import {
   connect,
   checkDoorStatus,
@@ -13,8 +17,8 @@ import {
   getDoorCount
 } from "../src/api/connect";
 import {
-  LineChart,
-  Line,
+  AreaChart,
+  Area,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -24,6 +28,8 @@ import {
   ReferenceLine
 } from "recharts";
 
+import whyDidYouUpdate from "why-did-you-update";
+whyDidYouUpdate(React);
 // Initialize Firebase
 var config = {
   apiKey: "AIzaSyA595Cjxncp2PTuJWMiwiBoInUdTLsxy0o",
@@ -97,10 +103,10 @@ class App extends Component {
     const { today } = this.state;
     console.log(this.state.today);
     const formattedData = data.length < 1 ? null : data.slice(-1).pop();
-    this.logRef.push({
-      lap: formattedData,
-      date: data.length < 1 ? null : today
-    });
+    // this.logRef.push({
+    //   lap: formattedData,
+    //   date: data.length < 1 ? null : today
+    // });
     console.log("help:", data, data.slice(-1).pop());
   };
 
@@ -123,7 +129,15 @@ class App extends Component {
       {}
     );
     if (!connectedUsers) {
-      return <Loading />;
+      return (
+        <Row vertical="center" horizontal="center">
+          <Column>
+            <div className="container">
+              <Loading id="loading-icon" />
+            </div>
+          </Column>
+        </Row>
+      );
     } else {
       return (
         <div className="container">
@@ -133,11 +147,20 @@ class App extends Component {
           <Row vertical="center" horizontal="center">
             <Column>
               <span>
+                <div id="welcome-msg">
+                  Welcome to the Restroom Occupancy Monitor
+                </div>
+              </span>
+            </Column>
+          </Row>
+          <Row vertical="center" horizontal="center">
+            <Column>
+              <span>
                 <div id="door-state">
                   {doorOpen ? (
                     <h3>
-                      You are free to try to <span id="pee">pee</span>
-                      ... or <span id="poop">poop</span>
+                      You are free to try to <span id="pee">Pee </span>
+                      or <span id="poop">Poop</span>
                     </h3>
                   ) : (
                     <h3>Your pee and poop will have to remain in you</h3>
@@ -157,54 +180,67 @@ class App extends Component {
                 ) : (
                   <img
                     id="tp-img"
-                    src="https://png.icons8.com/ios/1600/toilet-paper.png"
+                    src="http://rs557.pbsrc.com/albums/ss15/aedrielyve/animated%20gifs/kawaiitoiletpaper.gif~c200"
                     alt="stylized icon of tp"
                   />
                 )}
               </span>
             </Column>
           </Row>
+          <Row vertical="center" horizontal="center">
+            <Column>
+              <h4 id="chart-title">Restroom Results</h4>
+            </Column>
+          </Row>
+          <br />
           <Row vertical="center" horizontal="start">
-            <div className="chart-div">
-              {this.state.lapsFromTimer < 1 ? (
-                <>
-                  <h5 id="no-chart-txt">
-                    There is currently no data to display!
-                  </h5>
-                  <img
-                    id="no-chart-img"
-                    src={chartLogo}
-                    alt="no chart data pic"
-                  />
-                </>
-              ) : (
-                <span id="chart">
-                  <ResponsiveContainer width="90%" height={255} debounce={1}>
-                    <LineChart
-                      data={arraydata}
-                      margin={{ top: 15, right: 10, left: 10, bottom: 15 }}
-                    >
-                      <XAxis dataKey="count" />
-                      <YAxis />
-                      <CartesianGrid strokeDasharray=" 5" />
-                      <Tooltip />
-                      <Legend />
-                      <ReferenceLine
-                        y={60}
-                        label="Likely a poop"
-                        stroke="#6ab04c"
-                      />
-                      <Line
-                        type="monotone"
-                        dataKey="time"
-                        stroke="#8884d8"
-                        activeDot={{ r: 4 }}
-                      />
-                    </LineChart>
-                  </ResponsiveContainer>
-                </span>
-              )}
-            </div>
+            <Column>
+              <div className="chart-div">
+                {this.state.lapsFromTimer < 1 ? (
+                  <>
+                    <h5 id="no-chart-txt">
+                      There is currently no data to display!
+                    </h5>
+                    <img
+                      id="no-chart-img"
+                      src={chartLogo}
+                      alt="no chart data pic"
+                    />
+                  </>
+                ) : (
+                  <span id="chart">
+                    <ResponsiveContainer width="95%" height={255} debounce={1}>
+                      <AreaChart
+                        data={arraydata}
+                        margin={{ top: 21, right: 34, left: 38, bottom: 40 }}
+                      >
+                        <XAxis dataKey="count" />
+                        <YAxis />
+                        <CartesianGrid strokeDasharray="1" />
+                        {/* <Tooltip
+                        animationEasing="linear"
+                        viewBox={{ width: 25, height: 25 }}
+                      /> */}
+                        <Legend width={"95%"} />
+                        <ReferenceLine
+                          y={60}
+                          label="Likely a poop"
+                          stroke="#3e4e34"
+                        />
+                        <Area
+                          type="monotone"
+                          dataKey="time"
+                          stroke="#edd16b"
+                          activeDot={{ r: 4 }}
+                          fillOpacity={0.55}
+                          fill="#fab1a0"
+                        />
+                      </AreaChart>
+                    </ResponsiveContainer>
+                  </span>
+                )}
+              </div>
+            </Column>
           </Row>
           <Row vertical="center" horizontal="center">
             <Column>
@@ -222,7 +258,51 @@ class App extends Component {
               )}
             </Column>
           </Row>
-          {/* <footer>I have been rendered {++this.counter} times</footer> */}
+          <Row vertical="center" horizontal="center">
+            <Column>
+              <footer id="App-footer">
+                <span id="links-span">
+                  <a href="https://gobot.com/">
+                    <img
+                      id="ramen-pack"
+                      src="https://iotinvent.uk/wp-content/uploads/2018/02/PCB-icon.png"
+                      alt="Personal website link"
+                    />
+                  </a>
+                  <a href="https://github.com/teslatickles/r-o-m">
+                    <img id="octocat" src={Octocat} alt="github link" />
+                  </a>
+                  <a href="https://gobot.com/">
+                    <img
+                      id="ramen-pack"
+                      src="https://iotinvent.uk/wp-content/uploads/2018/02/PCB-icon.png"
+                      alt="Personal website link"
+                    />
+                  </a>
+                </span>
+                {/* <button id="footer-button">
+                  <img
+                    id="balloon"
+                    src={footerImg}
+                    alt="balloon icon for footer menu"
+                  />
+                </button> */}
+                <div id="footer-text">
+                  I have been rendered {++this.counter} times
+                </div>
+                <div id="copyright-text">
+                  copyright @ teslatickles [hunterhartline@gmail.com] 2018
+                </div>
+                <div>
+                  <img
+                    id="footer-logo"
+                    src={footerLogo}
+                    alt="responsive design logo at footer"
+                  />
+                </div>
+              </footer>
+            </Column>
+          </Row>
         </div>
       );
     }
