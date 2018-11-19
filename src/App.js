@@ -32,12 +32,8 @@ import whyDidYouUpdate from "why-did-you-update";
 whyDidYouUpdate(React);
 // Initialize Firebase
 var config = {
-  apiKey: "AIzaSyA595Cjxncp2PTuJWMiwiBoInUdTLsxy0o",
-  authDomain: "r-o-m-database.firebaseapp.com",
-  databaseURL: "https://r-o-m-database.firebaseio.com",
-  projectId: "r-o-m-database",
-  storageBucket: "r-o-m-database.appspot.com",
-  messagingSenderId: "751184942048"
+  // this info is hidden!  
+//
 };
 firebase.initializeApp(config);
 
