@@ -5,7 +5,7 @@ A handy IoT device that monitors the status of a restroom door ("closed"/"open")
 
 <img src="/screen3.PNG" height="475px" />  <img src="/screen4.PNG" height="475px" />
 
-<img src="/screen5.PNG" height="475px" />
+<img src="/sreen5.PNG" height="475px" />
 
 
 
