@@ -1,3 +1,23 @@
+A handy IoT device that monitors the status of a restroom door ("closed"/"open"), along with the duration of its being closed, and displays the data. The graphic user interface is aesthetically pleasing, and includes an interactive line graph and table that updates, real-time, newly recorded bathroom sessions. Built with React, Node, Johnny-Five, Sockets.io, and Firebase real-time database. 
+
+
+<img src="https://drive.google.com/file/d/1onSU3vpbHQpgxf_VYZE5Ukt6qjFiTJEX/view?usp=sharing"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
