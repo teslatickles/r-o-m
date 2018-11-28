@@ -1,7 +1,7 @@
 A handy IoT device that monitors the status of a restroom door ("closed"/"open"), along with the duration of its being closed, and displays the data. The graphic user interface is aesthetically pleasing, and includes an interactive line graph and table that updates, real-time, newly recorded bathroom sessions. Built with React, Node, Johnny-Five, Sockets.io, and Firebase real-time database. 
 
 
-<img src="/screen1.PNG" />
+<img src="/screen1.PNG" height="25%" />
 
 
 
