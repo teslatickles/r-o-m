@@ -1,59 +1,32 @@
 // connect socket api
+// bridges backend socket.io connections with React frontend
 
-import openSocket from "socket.io-client";
-const socket = openSocket("http://192.168.1.6:5000/");
+const openSocket = require('socket.io-client');
+// const socket = openSocket('192.168.1.138:5000/');
+// const socket = openSocket('192.168.1.17:5000/');
+const socket = openSocket('192.168.1.91:5000');
 
-function connect(cb) {
-  socket.on("connection", () => {
-    cb();
-  });
-
-  socket.on("addUser", updatedNumber => {
-    cb(updatedNumber);
-  });
-
-  socket.on("removeUser", updatedNumber => {
-    cb(updatedNumber);
-  });
+function connect(callback) {
+    socket.on("connection", () => callback());
+    socket.on("addUser", updatedNumber => callback(updatedNumber));
+    socket.on("removeUser", updatedNumber => callback(updatedNumber));
 }
 
-function getToday(cb) {
-  socket.on("today", result => {
-    cb(result);
-  });
+function getToday(callback) {
+    socket.on("today", result => callback(result));
 }
 
-function getDoorCount(cb) {
-  socket.on("pCount", result => {
-    cb(result);
-  });
+// obsolete method that will soon be removed
+// function getDoorCount(callback) {
+//     socket.on("pCount", result => callback(result));
+// }
+
+function checkDoorStatus(callback) {
+    socket.on("doorstatus", result => callback(result));
 }
 
-function checkDoorStatus(cb) {
-  socket.on("doorstatus", result => {
-    console.log("door is currently open?", result);
-    cb(result);
-  });
+function timerUpdate(callback) {
+    socket.on("timerStream", (isCounting, runTime) => callback(isCounting, runTime));
 }
 
-function timerUpdate(cb) {
-  socket.on("timerStream", (isCounting, runTime) => {
-    cb(isCounting, runTime);
-  });
-}
-
-export { connect, getToday, getDoorCount, checkDoorStatus, timerUpdate };
-
-//   socket.emit("authentication", {
-//     token: prompt("have to go?") === "yes" ? "secret token" : null
-//   });
-
-//   socket.on("unauthorized", reason => {
-//     console.log(`Unauthorized:, ${reason}`);
-//     error = reason.message;
-//     socket.disconnect();
-//   });
-
-//   socket.on("disconnect", reason => {
-//     console.log(`Disconnected: ${error || reason}`);
-//   });
+export { connect, getToday, checkDoorStatus, timerUpdate };
