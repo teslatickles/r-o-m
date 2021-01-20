@@ -1,0 +1,12 @@
+FROM node:12.18.3 AS server-build
+WORKDIR /usr/src/app
+
+# this is part of attempting to have optimize prod build
+# COPY --from=ui-build /usr/src/app/ ./r-o-m/build
+COPY package*.json ./
+
+RUN npm install 
+COPY . .
+
+EXPOSE 5000
+CMD ["node", "src/rom.js"]
