@@ -4,90 +4,69 @@ import { timerUpdate } from "../api/connect";
 import "../styles/timer.css";
 
 class Timer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isCounting: false,
-      runningTime: 0,
-      lapTimes: []
-    };
-  }
+    _isMounted = false;
 
-  componentDidMount() {
-    timerUpdate((isCounting, runTime) => {
-      if (isCounting) {
-        this.setState({
-          isCounting: isCounting,
-          runningTime: runTime
-        });
-      } else {
-        this.setState({
-          isCounting: isCounting,
-          runningTime: runTime,
-          lapTimes: this.state.lapTimes.concat(this.state.runningTime)
-        });
-        this.props.callbackFromParent(this.state.lapTimes);
-        // console.log(this.state.lapTimes, this.state.runningTime);
-      }
-    });
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            isCounting: false,
+            runningTime: 0,
+            lapTimes: []
+        };
+    }
 
-  render() {
-    const { runningTime, isCounting } = this.state;
-    return (
-      <div id="timer-main">
-        <h4 id="time-display">
-          {isCounting && <TimeElapsed runningTime={runningTime} />}
-        </h4>
-        {isCounting && (
-          <p>
-            Restroom door has been closed for duration above. <br />{" "}
-            {runningTime / 1000 < 60
-              ? `Likely just a pee, so far...`
-              : `uh-oh could be a poo, at this point`}
-          </p>
-        )}
-      </div>
-    );
-  }
+    componentDidMount() {
+        this._isMounted = true;
+
+        if (this._isMounted) {
+            timerUpdate((isCounting, runTime) => {
+                let newLapTimes = [];
+                if (isCounting) {
+                    this.setState({
+                        isCounting: isCounting,
+                        runningTime: runTime
+                    });
+                } else {
+                    newLapTimes.push(this.state.runningTime);
+                    this.setState({
+                        isCounting: isCounting,
+                        runningTime: runTime,
+                        lapTimes: newLapTimes
+                    });
+                    this.props.callbackFromParent(this.state.lapTimes[this.state.lapTimes.length - 1]);
+                }
+            });
+        }
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
+        timerUpdate((isCounting, runTime) => {
+            this.setState({
+                isCounting: false,
+                runningTime: 0
+            });
+        });
+    }
+
+    render() {
+        const { runningTime, isCounting } = this.state;
+        return (
+            <div id="timer-main">
+                <h4 id="time-display">
+                    {isCounting && <TimeElapsed runningTime={runningTime} />}
+                </h4>
+                {isCounting && (
+                    <p>
+                        Restroom door has been closed for duration above. <br />{" "}
+                        {runningTime / 1000 < 60
+                            ? `Likely just a pee, so far...`
+                            : `uh-oh could be a poo, at this point`}
+                    </p>
+                )}
+            </div>
+        );
+    }
 }
 
 export default Timer;
-
-// ["update", "startTimer", "stopTimer"].forEach(method => {
-//   this[method] = this[method].bind(this);
-// });
-
-// this is the client-side React code I converted to Node/JS and moved
-// to the backend--primarily Timer-related code that would not allow
-// client's access to timer when already engaged. Blog this!!!!!!!!!!!!
-// toggle(() => {
-//   console.log(this.state.lapTimes);
-//   this.setState({ isCounting: !this.state.isCounting }, () => {
-//     this.state.isCounting ? this.startTimer() : this.stopTimer();
-//   });
-//   if (this.state.lapTimes) {
-//   this.props.callbackFromParent(this.state.lapTimes);
-//   }
-// });
-
-//   startTimer() {
-//     this.startTime = Date.now();
-//     this.timer = setInterval(this.update, 10);
-//   }
-
-//   update() {
-//     const { runningTime } = this.state;
-//     var delta = Date.now() - this.startTime;
-//     this.setState({ runningTime: runningTime + delta });
-//     this.startTime = Date.now();
-//   }
-
-//   stopTimer() {
-//     const { lapTimes, runningTime } = this.state;
-//     this.setState({
-//       lapTimes: lapTimes.concat(runningTime),
-//       runningTime: 0
-//     });
-//     clearInterval(this.timer);
-//   }
