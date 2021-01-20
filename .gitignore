@@ -19,3 +19,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# user added
+scrap_saveforlater.txt
+.eslintrc
