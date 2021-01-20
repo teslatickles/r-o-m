@@ -20,6 +20,19 @@
   flex: 1 100%;
 }
 
+.container-variant-loading {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  min-height: 85vh;
+  border-radius: 15px;
+  background-color: #2C3539;
+  align-items: center;
+  justify-content: center;
+}
+
 .App-header {
   background-color: #edd16b;
   height: 4%;
@@ -56,7 +69,7 @@
   margin-top: -7%;
   flex: 1;
   justify-content: space-between;
-  align-content: center;
+  align-content: space-around;
   width: 100%;
 }
 
@@ -211,10 +224,10 @@ h4#chart-title {
 span#links-span {
   display: inline-flex;
   position: relative;
-  align-content: center;
-  justify-content: center;
-  align-items: center;
-  padding-top: 3%;
+  align-content: space-between;
+  justify-content: space-evenly;
+  align-items:flex-end;
+  padding-top: 2%;
 }
 
 #copyright-text {
@@ -238,9 +251,9 @@ img#balloon {
 img#tp-img {
   display: inline-flex;
   position: relative;
-  height: 132px;
-  margin-top: -3%;
-  margin-right: -5%;
+  height: 225px;
+  margin-top: -15%;
+  margin-right: -0%;
   max-width: 100%;
   align-items: baseline;
   justify-content: baseline;
@@ -270,12 +283,12 @@ img#octocat {
   flex: 1;
   align-content: center;
   justify-content: center;
-  height: 41px;
+  height: 20px;
   float: center;
 }
 
 img#ramen-pack {
-  height: 38px;
+  height: 20px;
   display: inline-flex;
   flex: 1;
   position: relative;
