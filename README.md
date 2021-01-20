@@ -1,6 +1,6 @@
 This is v2.0 of my (Hunter Hartline) Restroom Occupancy Monitor.
 
-Improvements already acclompished:
+Improvements already accomplished:
 
     - Major code cleanup (delete ALL unused code, refactored for significantly cleaner sections of code)
     - Added very necessary Node debounce function to use with magnetic door switch .on listener calling potentially pesky timer
