@@ -1,5 +1,9 @@
 .loading-cylon {
-  justify-content: end;
-  align-content: center;
-  align-items: center;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    overflow: hidden;
 }
