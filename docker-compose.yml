@@ -1,0 +1,25 @@
+# TODO:
+# separate backend and frontend node modules
+# this means two different package.json files
+# this will speed up builds esp. Docker
+# this will req. rearranging file structure:
+# rom.js will be in backend dir. with pkg.json
+# fix production config for optimization
+
+version: "2"
+services:
+  frontend:
+    build:
+      context: ./
+      dockerfile: Dockerfile-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./
+      dockerfile: Dockerfile-backend
+    ports:
+      - "5000:5000"
