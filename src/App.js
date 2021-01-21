@@ -4,7 +4,7 @@ import LapTimes from "./components/LapTimes";
 import { Column, Row } from "simple-flexbox";
 import firebase from "firebase";
 import Loading from "./components/Loading";
-import chartLogo from "../src/assets/statistics.svg";
+// import chartLogo from "../src/assets/statistics.svg";
 import Octocat from "../src/assets/Octocat.png";
 import "./styles/App.css";
 
@@ -206,11 +206,11 @@ class App extends Component {
                                         <h5 id="no-chart-txt">
                                             There is currently no data to display!
                     </h5>
-                                        <img
+                                        {/* <img
                                             id="no-chart-img"
                                             src={chartLogo}
                                             alt="no chart data pic"
-                                        />
+                                        /> */}
                                     </>
                                 ) : (
                                         <span id="chart">
