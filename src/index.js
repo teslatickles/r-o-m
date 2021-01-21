@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import "./styles/index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(<App />, document.getElementById("root"));
 
 if (module.hot) {
-  module.hot.accept();
+    module.hot.accept();
 }
 
 // If you want your app to work offline and load faster, you can change

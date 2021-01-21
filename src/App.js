@@ -4,9 +4,9 @@ import LapTimes from "./components/LapTimes";
 import { Column, Row } from "simple-flexbox";
 import firebase from "firebase";
 import Loading from "./components/Loading";
-// import chartLogo from "../src/statistics.svg";
-import Octocat from "../src/Octocat.png";
-import "./App.css";
+// import chartLogo from "../src/assets/statistics.svg";
+import Octocat from "../src/assets/Octocat.png";
+import "./styles/App.css";
 
 import {
     connect,
@@ -62,7 +62,6 @@ class App extends Component {
                 today: result
             });
         });
-
         this.logRef.once('value', snap => {
             let items = [];
             snap.forEach((child) => {
