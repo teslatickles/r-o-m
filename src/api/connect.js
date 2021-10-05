@@ -2,9 +2,7 @@
 // bridges backend socket.io connections with React frontend
 
 const openSocket = require('socket.io-client');
-// const socket = openSocket('192.168.1.138:5000/');
-// const socket = openSocket('192.168.1.17:5000/');
-const socket = openSocket('192.168.1.91:5000');
+const socket = openSocket('xxx.xxx.x.xxx:5000');
 
 function connect(callback) {
     socket.on("connection", () => callback());
