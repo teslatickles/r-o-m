@@ -6,7 +6,7 @@
     "animejs": "^2.2.0",
     "bufferutil": "^4.0.0",
     "express": "^4.16.4",
-    "firebase": "^8.2.2",
+    "firebase": "^10.9.0",
     "johnny-five": "^1.0.0",
     "react": "^16.5.2",
     "react-anime": "^2.2.0",
